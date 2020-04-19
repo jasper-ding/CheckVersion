@@ -54,7 +54,7 @@ namespace CheckVersion
             if (myWebPage.PingHost())
             {
                 string szURL = MyApp.WebSite + "/api/CheckUpdate.php";
-                string param = "t1=" + lastUpdate;
+                string param = "no=" + m_nMachineNo.ToString() + "&t1=" + lastUpdate;
 
                 string buf = myWebPage.GetResponseString(szURL, param);
                 if (buf != "")
@@ -62,7 +62,7 @@ namespace CheckVersion
                     string[] aAry = buf.Split(',');
                     for (Int32 i = 0; i < aAry.Length; i += 2)
                     {
-                        DownFile(aAry[i], aAry[i+1]);
+                        DownFile(aAry[i], aAry[i+1]);   // 下載檔案並更新。
                     }
                     listBox1.Items.Add("Update OK!");
                     lastUpdate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
